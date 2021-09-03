@@ -1,4 +1,4 @@
-import Entity.{Animal, Entity}
+import Entity.{Animal, Entity, Type}
 
 object main {
 	// Similar to Kotlin
@@ -17,7 +17,9 @@ object main {
 		val e: Entity = new Entity();
 		e.vel = Array(0, 1, 0)
 
-		val a: Animal = new Animal(Entity.Type.ANIMAL.PIG)
-		log(e.toString)
+		val a: Animal = new Animal(Type.ANIMAL.PIG)
+		a.animalType = Type.ANIMAL.SHEEP
+		a.pos = Array(1, 2, 3)
+		log(a.toString)
 	}
 }
