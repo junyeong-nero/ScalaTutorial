@@ -12,8 +12,6 @@ class Entity(var vel: Array[Double] = Array(0, 0, 0),
 		this.tag = tag
 	}
 
-
-
 	override def toString: String = {
 		s"${this.tag} : ${this.pos.mkString("pos(", ", ", ")")} / ${this.vel.mkString("vel(", ", ", ")")}"
 	}
