@@ -78,10 +78,22 @@ object main {
 		println(s"test1 : ${toString(test)}")
 		println(s"test2 : ${toString(test2)}")
 		println(s"test3 : ${toString(test3)}")
-		println(length(test))
+		println(s"length : length(test)")
 
-		println(s"test3 : ${toString(remove(test3, 2))}")
-		println(s"test3 : ${toString(add(test3, 2, 100))}")
+		println()
+
+		println(s"remove : ${toString(remove(test3, 2))}")
+		println(s"insert : ${toString(insert(test3, 2, 100))}")
+		println(s"reverse : ${toString(reverse(test3))}")
+
+		println()
+
+		val a = insert(insert(test, 7), 7)
+		println(s"a : ${toString(a)}")
+		println(s"remove_first : ${toString(remove_first(a, 7))}")
+		println(s"remove_all : ${toString(remove_all(a, 7))}")
+		println(s"remove_index : ${toString(remove(a, 2))}")
+
 	}
 
 
@@ -105,8 +117,8 @@ object main {
 
 	def toString(list: IntList, str: String = ""): String =
 		list match {
-			case Nil() => str.substring(0, str.length - 2)
-			case Cons(head, tail) => toString(tail, str + head.toString + ", ")
+			case Nil() => str + "nil"
+			case Cons(head, tail) => toString(tail, str + head.toString + "::")
 		}
 
 	def concat(first: IntList, second: IntList): IntList =
@@ -115,17 +127,27 @@ object main {
 			case Cons(head, tail) => Cons(head, concat(tail, second))
 		}
 
-	def add(list: IntList, index: Int, element: Int): IntList =
+	def insert(list: IntList, index: Int, element: Int): IntList =
 		list match {
 			case Nil() => Nil()
 			case Cons(head, tail) =>
 				if (index == 0)
 					Cons(element, list)
 				else
-					Cons(head, add(tail, index - 1, element))
+					Cons(head, insert(tail, index - 1, element))
 		}
 
-	def remove(list: IntList, index: Int): IntList =
+	def insert(list: IntList, element: Int): IntList =
+		list match {
+			case Nil() => Nil()
+			case Cons(head, tail) =>
+				if (element < head)
+					Cons(element, list)
+				else
+					Cons(head, insert(tail, element))
+		}
+
+	def remove(list: IntList, index: Int): IntList = {
 		list match {
 			case Nil() => Nil()
 			case Cons(head, tail) =>
@@ -133,5 +155,43 @@ object main {
 					remove(tail, index - 1)
 				else
 					Cons(head, remove(tail, index - 1))
+		}
+	}
+
+	def remove_first(list: IntList, n: Int): IntList =
+		list match {
+			case Nil() => list
+			case Cons(head, tail) =>
+				if (n == head)
+					tail
+				else
+					Cons(head, remove_first(tail, n))
+		}
+
+	def remove_all(list: IntList, n: Int): IntList =
+		list match {
+			case Nil() => list
+			case Cons(head, tail) =>
+				if (n == head)
+					remove_all(tail, n)
+				else
+					Cons(head, remove_all(tail, n))
+		}
+
+	def reverse(list: IntList): IntList =
+		list match {
+			case Nil() => Nil()
+			case Cons(head, tail) =>
+				concat(reverse(tail), Cons(head, Nil()))
+		}
+
+	def nth(list: IntList, n: Int): Option[Int] =
+		list match {
+			case Nil() => None
+			case Cons(head, tail) =>
+				if (n == 0)
+					Some(head)
+				else
+					nth(tail, n - 1)
 		}
 }
