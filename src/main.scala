@@ -194,4 +194,10 @@ object main {
 				else
 					nth(tail, n - 1)
 		}
+		
+	def map(list: IntList, func: Int => Int): IntList = 
+		list match {
+			case Nil() => Nil()
+			case Cons(head, tail) => Cons(func(head), map(tail))
+		}
 }
