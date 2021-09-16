@@ -198,6 +198,16 @@ object main {
 	def map(list: IntList, func: Int => Int): IntList = 
 		list match {
 			case Nil() => Nil()
-			case Cons(head, tail) => Cons(func(head), map(tail))
+			case Cons(head, tail) => Cons(func(head), map(tail, func))
 		}
+	
+	val cube = (x: Int) => x * x * x
+	val square = (x: Int) => x * x
+	val sum3 = (x: Int, y: Int, z: Int, ftn: Int => Int) => 
+		ftn(x) + ftn(y) + ftn(z)
+	
+	def Test_Map(): Unit = {
+		print(sum3(1,2,3,square))
+		print(sum3(1,2,3,cube))
+	}
 }
