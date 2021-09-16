@@ -194,12 +194,6 @@ object main {
 				else
 					nth(tail, n - 1)
 		}
-		
-	def map(list: IntList, func: Int => Int): IntList = 
-		list match {
-			case Nil() => Nil()
-			case Cons(head, tail) => Cons(func(head), map(tail, func))
-		}
 	
 	val cube = (x: Int) => x * x * x
 	val square = (x: Int) => x * x
