@@ -203,5 +203,16 @@ object main {
 	def Test_Map(): Unit = {
 		print(sum3(1,2,3,square))
 		print(sum3(1,2,3,cube))
+		
+		val l = Cons(5, Cons(3, Cons(7, Nil()))
+		print(map(l, cube))
 	}
+	
+	val mult = (a: Int, b: Int) => a * b
+	// fold(1, mult, 1)
+	def fold (base: Int, ftn: (Int, Int) => Int, list: IntList): Int = 
+		list match {
+			case Nil() => base
+			case Cons(head, tail) => fold(ftn(base, head), ftn, tail)
+		}
 }
