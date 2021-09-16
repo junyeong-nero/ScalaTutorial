@@ -215,4 +215,18 @@ object main {
 			case Nil() => base
 			case Cons(head, tail) => fold(ftn(base, head), ftn, tail)
 		}
+	
+	// return function
+	def makeAdder(x: Int): Int => Int = {
+		def adder(y: Int): Int = x + y
+		adder
+	}
+	
+	def Test_Closure(): Unit = {
+		val add1 = makeAdder(1)
+		print(add1(5))
+		val add100 = makeAdder(100)
+		print(add100(5))	
+	}
+	
 }
