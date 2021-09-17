@@ -7,20 +7,20 @@ import scala.collection.mutable
 
 object main {
 	// Similar to Kotlin
-
+	def main(args: Array[String]): Unit = {
+		FunctionalProgramming()
+	}
+	
 	val addition = (x: Int, y: Int) => x + y // seems like lambda in JAVA but JAVA use ->
 	def multiplication(x: Int, y: Int): Int = { // Unit is subtype of AnyVar
 		x * y // we don't need return keyword!
 	}
-
+	
 	val log = (text: String) => println(s"${this.getClass.getSimpleName}/${text}")
+
 	val fact: Int => Int = (x: Int) => {
 		if (x == 1) x
 		else x * fact(x - 1)
-	}
-
-	def main(args: Array[String]): Unit = {
-		FunctionalProgramming()
 	}
 
 	def ClassTest(): Unit = {
@@ -93,7 +93,21 @@ object main {
 		println(s"remove_first : ${toString(remove_first(a, 7))}")
 		println(s"remove_all : ${toString(remove_all(a, 7))}")
 		println(s"remove_index : ${toString(remove(a, 2))}")
-
+		
+		print(sum3(1,2,3,square))
+		print(sum3(1,2,3,cube))
+		
+		val l = Cons(5, Cons(3, Cons(7, Nil())))
+		println(toString(map(l, square)))
+		println(toString(map(l, cube)))
+		
+		val add1 = makeAdder(1)
+		println(add1(5))
+		val add100 = makeAdder(100)
+		println(add100(5))
+		
+		val mul100 = makeMultiplier(100)
+		println(mul100(5))
 	}
 
 
@@ -200,14 +214,6 @@ object main {
 	val sum3 = (x: Int, y: Int, z: Int, ftn: Int => Int) => 
 		ftn(x) + ftn(y) + ftn(z)
 	
-	def Test_Map(): Unit = {
-		print(sum3(1,2,3,square))
-		print(sum3(1,2,3,cube))
-		
-		val l = Cons(5, Cons(3, Cons(7, Nil()))
-		print(map(l, cube))
-	}
-	
 	val mult = (a: Int, b: Int) => a * b
 	// fold(1, mult, 1)
 	def fold (base: Int, ftn: (Int, Int) => Int, list: IntList): Int = 
@@ -222,11 +228,6 @@ object main {
 		adder
 	}
 	
-	def Test_Closure(): Unit = {
-		val add1 = makeAdder(1)
-		print(add1(5))
-		val add100 = makeAdder(100)
-		print(add100(5))	
-	}
+	def makeMultiplier(x: Int): Int => Int = (y: Int) => x * y
 	
 }
