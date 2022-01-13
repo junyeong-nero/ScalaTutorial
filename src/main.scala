@@ -1,4 +1,6 @@
 import Entity._
+
+import scala.Console.in
 // import the names define in Entity package
 // same as numpy import *
 
@@ -8,7 +10,7 @@ import scala.collection.mutable
 object main {
 	// Similar to Kotlin
 	def main(args: Array[String]): Unit = {
-		FunctionalProgramming()
+//		FunctionalProgramming()
 	}
 	
 	val addition = (x: Int, y: Int) => x + y // seems like lambda in JAVA but JAVA use ->
